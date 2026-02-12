@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        /* THIS IS WHERE YOU CHANGE YOUR STYLE */
+        body {
+            background-color: #ffebee; /* Soft Pink */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        h1 { color: #d32f2f; font-size: 3rem; }
+        .buttons { margin-top: 20px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            border: none;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        #yes-btn { background-color: #4caf50; color: white; }
+        #no-btn { background-color: #f44336; color: white; position: absolute; }
+        .hidden { display: none; }
+        img { width: 200px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="main-card">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif" alt="Cute GIF">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <div class="buttons">
+            <button id="yes-btn" onclick="celebrate()">YES</button>
+            <button id="no-btn">NO</button>
+        </div>
+    </div>
+
+    <div id="celebration" class="hidden">
+        <h1>Yay! See you on the 14th! 🥰</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/K97676p2D7V6/giphy.gif">
+        <audio id="v-music" loop>
+            <source src="https://www.google.com/search?q=gummadi+gummadi+song+free&sca_esv=f6aa0b4fea544edf&rlz=1C1HKFL_enGB1200GB1200&sxsrf=ANbL-n6HulJwBhNdK6zlNAN9ZE8Zu0neXg%3A1770914881053&ei=QQSOae7yAvCyhbIPqaqG-Q0&biw=1536&bih=776&ved=0ahUKEwiul6aDtNSSAxVwWUEAHSmVId8Q4dUDCBM&uact=5&oq=gummadi+gummadi+song+free&gs_lp=Egxnd3Mtd2l6LXNlcnAiGWd1bW1hZGkgZ3VtbWFkaSBzb25nIGZyZWVIhwxQwQFY2AlwAXgBkAEAmAGNAaABowSqAQMyLjO4AQPIAQD4AQGYAgOgAtgBwgIKEAAYsAMY1gQYR8ICDRAAGIAEGLADGEMYigXCAgoQABiABBhDGIoFwgIFEAAYgATCAgoQLhiABBhDGIoFwgIGEAAYFhgemAMAiAYBkAYKkgcDMi4xoAf9ELIHAzEuMbgHzwHCBwMyLTPIBxOACAA&sclient=gws-wiz-serp#fpstate=ive&vld=cid:05a331b7,vid:pILh_KHNDTQ,st:0">
+        </audio>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+
+        // The Dodge Logic
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // The Celebration Logic
+        function celebrate() {
+            document.getElementById('main-card').classList.add('hidden');
+            document.getElementById('celebration').classList.remove('hidden');
+            document.getElementById('v-music').play();
+            // Create confetti
+            for(let i=0; i<50; i++) { createConfetti(); }
+        }
+    </script>
+</body>
+</html>
