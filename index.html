@@ -135,50 +135,21 @@
                             </linearGradient>
                         </defs>
                         
-                        <!-- Boy -->
-                        <g class="boy">
-                            <!-- Hair back -->
-                            <ellipse cx="55" cy="55" rx="28" ry="25" fill="url(#hairGrad)"/>
-                            <!-- Face -->
-                            <ellipse cx="55" cy="70" rx="22" ry="26" fill="url(#skinGrad)"/>
-                            <!-- Eyes -->
-                            <ellipse cx="48" cy="65" rx="4" ry="5" fill="#333"/>
-                            <ellipse cx="62" cy="65" rx="4" ry="5" fill="#333"/>
-                            <circle cx="49" cy="63" r="1.5" fill="white"/>
-                            <circle cx="63" cy="63" r="1.5" fill="white"/>
-                            <!-- Blush -->
-                            <ellipse cx="42" cy="75" rx="4" ry="2" fill="#FFB6C1" opacity="0.6"/>
-                            <ellipse cx="68" cy="75" rx="4" ry="2" fill="#FFB6C1" opacity="0.6"/>
-                            <!-- Smile -->
-                            <path d="M48 82Q55 88 62 82" stroke="#FF69B4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            <!-- Hair front -->
-                            <path d="M35 55Q55 40 75 55" fill="none" stroke="url(#hairGrad)" stroke-width="8" stroke-linecap="round"/>
-                        </g>
-                        
-                        <!-- Girl -->
-                        <g class="girl">
-                            <!-- Hair back -->
-                            <ellipse cx="145" cy="55" rx="30" ry="28" fill="#2C1810"/>
-                            <!-- Face -->
-                            <ellipse cx="145" cy="70" rx="22" ry="26" fill="url(#skinGrad)"/>
-                            <!-- Eyes with lashes -->
-                            <ellipse cx="138" cy="65" rx="4" ry="5" fill="#333"/>
-                            <ellipse cx="152" cy="65" rx="4" ry="5" fill="#333"/>
-                            <circle cx="139" cy="63" r="1.5" fill="white"/>
-                            <circle cx="153" cy="63" r="1.5" fill="white"/>
-                            <!-- Lashes -->
-                            <path d="M134 62L130 58" stroke="#333" stroke-width="1.5"/>
-                            <path d="M158 62L162 58" stroke="#333" stroke-width="1.5"/>
-                            <!-- Blush -->
-                            <ellipse cx="132" cy="75" rx="4" ry="2" fill="#FFB6C1" opacity="0.6"/>
-                            <ellipse cx="158" cy="75" rx="4" ry="2" fill="#FFB6C1" opacity="0.6"/>
-                            <!-- Smile -->
-                            <path d="M138 82Q145 88 152 82" stroke="#FF69B4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            <!-- Hair with bow -->
-                            <path d="M125 50Q145 35 165 50" fill="none" stroke="#2C1810" stroke-width="10" stroke-linecap="round"/>
-                            <path d="M140 38L150 38L145 48Z" fill="#FF1493"/>
-                            <circle cx="145" cy="38" r="5" fill="#FF69B4"/>
-                        </g>
+                        <!-- Your Photos -->
+<clipPath id="circleClip">
+    <circle cx="0" cy="0" r="25" />
+</clipPath>
+
+<!-- Your Photo -->
+<g transform="translate(70,70)">
+    <image href="me.jpg" x="-25" y="-25" width="50" height="50" clip-path="url(#circleClip)" />
+</g>
+
+<!-- Her Photo -->
+<g transform="translate(130,70)">
+    <image href="her.jpg" x="-25" y="-25" width="50" height="50" clip-path="url(#circleClip)" />
+</g>
+
                         
                         <!-- Floating hearts between them -->
                         <text x="85" y="50" font-size="16" class="floating-heart-text">💕</text>
