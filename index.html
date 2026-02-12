@@ -3,76 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>A Gift For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* THIS IS WHERE YOU CHANGE YOUR STYLE */
-        body {
-            background-color: #ffebee; /* Soft Pink */
+        :root {
+            --gold: #ffd700;
+            --pink: #ff4d6d;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+        }
+
+        .screen {
+            position: absolute;
+            width: 100%; height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
+            align-items: center;
+            transition: opacity 1s ease-in-out;
             text-align: center;
         }
-        h1 { color: #d32f2f; font-size: 3rem; }
-        .buttons { margin-top: 20px; }
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            border-radius: 10px;
-            border: none;
-            margin: 10px;
-            transition: 0.3s;
+
+        .hidden { opacity: 0; pointer-events: none; }
+
+        /* PHASE 1: THE PHOTO */
+        #photo-screen { background: #fff; cursor: pointer; }
+        .landscape-img {
+            width: 80%; max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
-        #yes-btn { background-color: #4caf50; color: white; }
-        #no-btn { background-color: #f44336; color: white; position: absolute; }
-        .hidden { display: none; }
-        img { width: 200px; border-radius: 20px; }
+
+        /* PHASE 2: THE TREASURE */
+        #treasure-screen { background: radial-gradient(circle at center, #1a1a1a 0%, #000 70%); }
+        .box { font-size: 100px; cursor: pointer; filter: drop-shadow(0 0 20px var(--gold)); transition: 0.3s; }
+        .box:hover { transform: scale(1.1); }
+
+        /* PHASE 3: THE PROPOSAL */
+        #proposal-screen { background: #0a0a0a; color: white; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold); margin: 10px; }
+        .btn-group { margin-top: 30px; position: relative; width: 300px; height: 60px; }
+        button { padding: 12px 35px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; }
+        #yes-btn { background: var(--gold); color: #000; font-size: 1.2rem; }
+        #no-btn { background: #333; color: white; position: absolute; }
+
+        /* PHASE 4: FINAL MESSAGE & HEARTS */
+        #message-screen { background: linear-gradient(to bottom, #000, #1a0000); color: white; }
+        .love-letter { max-width: 80%; line-height: 1.8; color: #ffccd5; font-size: 1.3rem; z-index: 5; }
+
+        /* HEART ANIMATION */
+        .heart {
+            position: absolute;
+            color: var(--pink);
+            font-size: 20px;
+            user-select: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="main-card">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif" alt="Cute GIF">
-        <h1>Will you be my Valentine? ❤️</h1>
-        <div class="buttons">
-            <button id="yes-btn" onclick="celebrate()">YES</button>
-            <button id="no-btn">NO</button>
+    <div id="photo-screen" class="screen" onclick="showTreasure()">
+        <img src="her.jpg" class="landscape-img">
+        <p style="color: #666; margin-top: 20px; letter-spacing: 3px;">TAP TO OPEN</p>
+    </div>
+
+    <div id="treasure-screen" class="screen hidden">
+        <div class="box" onclick="showProposal()">🎁</div>
+        <p style="color: var(--gold); margin-top: 20px;">Something is waiting for you...</p>
+    </div>
+
+    <div id="proposal-screen" class="screen hidden">
+        <h1>Will you be my Valentine?</h1>
+        <div class="btn-group">
+            <button id="yes-btn" onclick="showMessage()">Yes!</button>
+            <button id="no-btn">No</button>
         </div>
     </div>
 
-    <div id="celebration" class="hidden">
-        <h1>Yay! See you on the 14th! 🥰</h1>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/K97676p2D7V6/giphy.gif">
-        <audio id="v-music" loop>
-            <source src="https://www.google.com/search?q=gummadi+gummadi+song+free&sca_esv=f6aa0b4fea544edf&rlz=1C1HKFL_enGB1200GB1200&sxsrf=ANbL-n6HulJwBhNdK6zlNAN9ZE8Zu0neXg%3A1770914881053&ei=QQSOae7yAvCyhbIPqaqG-Q0&biw=1536&bih=776&ved=0ahUKEwiul6aDtNSSAxVwWUEAHSmVId8Q4dUDCBM&uact=5&oq=gummadi+gummadi+song+free&gs_lp=Egxnd3Mtd2l6LXNlcnAiGWd1bW1hZGkgZ3VtbWFkaSBzb25nIGZyZWVIhwxQwQFY2AlwAXgBkAEAmAGNAaABowSqAQMyLjO4AQPIAQD4AQGYAgOgAtgBwgIKEAAYsAMY1gQYR8ICDRAAGIAEGLADGEMYigXCAgoQABiABBhDGIoFwgIFEAAYgATCAgoQLhiABBhDGIoFwgIGEAAYFhgemAMAiAYBkAYKkgcDMi4xoAf9ELIHAzEuMbgHzwHCBwMyLTPIBxOACAA&sclient=gws-wiz-serp#fpstate=ive&vld=cid:05a331b7,vid:pILh_KHNDTQ,st:0">
-        </audio>
-    </div>
-
-    <script>
-        const noBtn = document.getElementById('no-btn');
-        const yesBtn = document.getElementById('yes-btn');
-
-        // The Dodge Logic
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        });
-
-        // The Celebration Logic
-        function celebrate() {
-            document.getElementById('main-card').classList.add('hidden');
-            document.getElementById('celebration').classList.remove('hidden');
-            document.getElementById('v-music').play();
-            // Create confetti
-            for(let i=0; i<50; i++) { createConfetti(); }
-        }
-    </script>
-</body>
-</html>
+    <div id="message-screen" class="screen hidden">
+        <h1 style="z-index: 5;">I Love You ❤️</h1>
+        <div class="love-letter">
+            <p>Write your heart out here... <br> Tell her why she's the one.</p>
+        </div>
+        <audio id="v-music" loop
